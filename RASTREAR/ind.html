@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rastreo de Envíos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #004aad;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    input {
+      width: 70%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 16px;
+      background: #004aad;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    button:hover {
+      background: #003080;
+    }
+    .status {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+    }
+    .success {
+      background: #e6f7e9;
+      color: #2a7d2a;
+    }
+    .error {
+      background: #fde8e8;
+      color: #b80000;
+    }
+    .progress {
+      margin-top: 15px;
+      background: #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 20px;
+    }
+    .progress-bar {
+      height: 100%;
+      background: #004aad;
+      width: 80%; /* Estado "en ruta" */
+    }
+    ul {
+      margin-top: 15px;
+      padding-left: 20px;
+    }
+    li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>📦 Rastreo de Envíos</header>
+  <div class="container">
+    <label for="codigo">Ingrese su código de rastreo:</label><br><br>
+    <input type="text" id="codigo" placeholder="Ejemplo: 2767C">
+    <button onclick="buscar()">Buscar</button>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function buscar() {
+      const codigo = document.getElementById("codigo").value.trim().toUpperCase();
+      const resultado = document.getElementById("resultado");
+
+      if (codigo === "2767C") {
+        resultado.innerHTML = `
+          <div class="status success">
+            🚚 Estado actual: <b>En ruta de entrega</b>
+          </div>
+          <div class="progress">
+            <div class="progress-bar"></div>
+          </div>
+          <ul>
+            <li>✅ Pedido recibido - 20 Ago</li>
+            <li>✅ Procesando en almacén - 21 Ago</li>
+            <li>✅ En tránsito - 22 Ago</li>
+            <li>🚚 En ruta de entrega - 23 Ago</li>
+            <li>⬜ Entregado - Pendiente</li>
+          </ul>
+        `;
+      } else {
+        resultado.innerHTML = `
+          <div class="status error">
+            ❌ Error: código no encontrado
+          </div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
